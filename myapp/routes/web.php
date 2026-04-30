@@ -5,15 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ContactController;
-
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+use App\Http\Controllers\CategoryController;
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -29,3 +21,4 @@ require __DIR__.'/auth.php';
 
 
 Route::resource('/contacts', ContactController::class);
+Route::resource('/category',CategoryController::class);

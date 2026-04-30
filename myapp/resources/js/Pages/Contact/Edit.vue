@@ -1,14 +1,14 @@
 <script setup>
 import { useForm,router } from '@inertiajs/vue3';
 
-const props=defineProps(['categories']);
+const props=defineProps(['categories','contact']);
 const form = useForm({
-    name:'',
-    phone:'',
-    category_id:''
+    name:props.contact.name,
+    phone:props.contact.phone,
+    category_id:props.contact.category_id
 })
 function submit() {
-form.post(route('contacts.store'))
+form.put(`/contacts/${props.contact.id}`)
 
 }
 
@@ -22,7 +22,7 @@ router.visit('/contacts')
 
 <template>
 
-<h1>Contact Person</h1>
+<h1>Contact Edit</h1>
 
 <div v-if="$page.props.flash.success" style="color:green">
 {{ $page.props.flash.success }}
@@ -34,10 +34,7 @@ router.visit('/contacts')
   <label >Name:
     <input type="text" name="name" v-model="form.name" >
   </label>
-<div style="color:red" v-if="form.errors.name">
-{{ form.errors.name }}
 
-</div>
 
 
 
@@ -45,13 +42,8 @@ router.visit('/contacts')
   <label >Phone:
     <input type="text" name="phone" v-model="form.phone">
   </label>
-<div style="color:red" v-if="form.errors.phone">
-{{ form.errors.phone }}
 
-</div>
-
-
-
+<label>Category:</label>
 <select v-model="form.category_id">
 <option value="">Select Category</option>
 <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
