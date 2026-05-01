@@ -7,17 +7,17 @@ function goToCreate(){
 router.visit('/contacts/create')
 }
 
-function goToEdit(id) {
-    router.visit(`contacts/${id}/edit`)
-}
+//function goToEdit(id) {
+  //  router.visit(`contacts/${id}/edit`)
+//}
 
-function deleteContact(id) {
-    if (confirm('Are you sure you want to delete this contact?')) {
-    router.delete(`/contacts/${id}`)
+//function deleteContact(id) {
+  //  if (confirm('Are you sure you want to delete this contact?')) {
+   // router.delete(`/contacts/${id}`)
 
-}
+//}
 
-}
+//}
 
 </script>
 <template>
@@ -33,10 +33,9 @@ function deleteContact(id) {
 <p>Category:{{ contact.category.name }}</p>
 
 
-
-
-       <button class="success" @click="goToEdit(contact.id)">Edit</button> -
-      <button class="danger" @click="deleteContact(contact.id)">Delete</button>
+<Link :href="`/contacts/${contact.id}/edit`" class="success">
+Edit
+</Link>
 
 
 
