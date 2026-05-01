@@ -45,7 +45,7 @@ router.visit('/contacts')
 
 <label>Category:</label>
 <select v-model="form.category_id">
-<option value="">Select Category</option>
+
 <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
 </select>
 
