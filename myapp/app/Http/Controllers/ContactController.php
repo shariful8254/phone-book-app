@@ -70,7 +70,7 @@ class ContactController extends Controller
     {
       $contact  =Contact::findOrFail($id);
       $contact->update($request->all());
-      return redirect()->route('contacts.index');
+      return redirect()->route('contacts.index')->with('success','update successfully');
     }
 
     /**
@@ -79,6 +79,6 @@ class ContactController extends Controller
     public function destroy(string $id)
     {
         Contact::findOrFail($id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success','delete successfully');
     }
 }
