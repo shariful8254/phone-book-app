@@ -57,8 +57,12 @@ class ContactController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('Contact/Edit',['contact' => Contact::findOrFail($id),
-       'categories' => Category::all()
+     $contact = Contact::findOrFail($id);
+      $categories =    Category::all();
+        return Inertia::render('Contact/Edit',[
+       'contact' => $contact,
+       'categories' => $categories                        
+                               
         ]);
 
     }
@@ -69,8 +73,19 @@ class ContactController extends Controller
     public function update(Request $request, string $id)
     {
       $contact  =Contact::findOrFail($id);
+        
+         $request->validate([
+
+            'name' => 'required',
+            'phone' => 'required',
+            'category_id' => 'required|exists:categories,id',
+
+
+
+        ]);
       $contact->update($request->all());
-      return redirect()->route('contacts.index')->with('success','update successfully');
+        
+      return redirect()->route('contacts.show',$contact->id)->with('success','update successfully');
     }
 
     /**
