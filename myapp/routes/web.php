@@ -19,6 +19,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::resource('/contacts', ContactController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('/contacts', ContactController::class);
 Route::resource('/category',CategoryController::class);
+});
+
+
+
